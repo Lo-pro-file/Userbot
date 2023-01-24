@@ -259,7 +259,7 @@ async def skip(_, message: Message):
              
 
 
-@Client.on_message(commandpro([".stp", ".end", "end", "stp"]) & SUDOERS)
+@Client.on_message(commandpro(["stop", "/stop", "/end", ".stp", ".end", "end", "stp"]) & SUDOERS)
 async def stop(_, message: Message):
     await message.delete()
     ACTV_CALLS = []
