@@ -30,7 +30,7 @@ async def inviteall(client: Client, message: Message):
 
 __MODULE__ = "Aᴅᴅ Aʟʟ"
 __HELP__ = f"""
-`.addall [@groupusername]` **- Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Tᴏ Aᴅᴅ Mᴇᴍʙᴇʀs Iɴ Yᴏᴜʀ Cʜᴀᴛ**
+`.addall [@WOODcraft_Mirror_Topic]` **- Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Tᴏ Aᴅᴅ Mᴇᴍʙᴇʀs Iɴ Yᴏᴜʀ Cʜᴀᴛ**
 
-**Ex:-** `.addall @adityadiscus`
+**Ex:-** `.addall @WOODcraft_Mirror_Topic`
 """
