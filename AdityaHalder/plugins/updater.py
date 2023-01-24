@@ -57,7 +57,7 @@ async def update_bot(_, message: Message):
         system("git pull -f && pip3 install -U -r Installer")
         system("python3 -m AdityaHalder")
         return
-    await msg.edit(f"**🥀 Gᴇɴɪᴜs UsᴇʀBᴏᴛ Aʟʀᴇᴀᴅʏ\nUᴘᴅᴀᴛᴇᴅ Tᴏ Lᴀᴛᴇsᴛ 🔥 ...\n\n💕 Fᴏʀ Aɴʏ Qᴜᴇʀʏ › Cᴏɴᴛᴀᴄᴛ\nTᴏ » @AdityaHalder ✨ ...**")
+    await msg.edit(f"**🥀 WD ZONE UsᴇʀBᴏᴛ Aʟʀᴇᴀᴅʏ\nUᴘᴅᴀᴛᴇᴅ Tᴏ Lᴀᴛᴇsᴛ 🔥 ...\n\n💕 Fᴏʀ Aɴʏ Qᴜᴇʀʏ › Cᴏɴᴛᴀᴄᴛ\nTᴏ » @AdityaHalder ✨ ...**")
 
 __MODULE__ = "Uᴘᴅᴀᴛᴇ"
 __HELP__ = f"""
