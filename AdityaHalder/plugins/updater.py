@@ -53,7 +53,7 @@ async def update_bot(_, message: Message):
     msg = await message.edit("**🥀 ᴄʜᴇᴄᴋɪɴɢ ᴜᴘᴅᴀᴛᴇs ✨ ...**")
     update_avail = updater()
     if update_avail:
-        await msg.edit("**🥀 Gᴇɴɪᴜs UsᴇʀBᴏᴛ Uᴘᴅᴀᴛᴇᴅ\nTᴏ Lᴀᴛᴇsᴛ Vᴇʀsɪᴏɴ 🔥 ...\n\n💕 Rᴇsᴛᴀʀᴛɪɴɢ: Gᴇɴɪᴜs Usᴇʀ\nBᴏᴛ, Pʟᴇᴀsᴇ » Wᴀɪᴛ ✨ ...**")
+        await msg.edit("**🥀 WD ZONE UsᴇʀBᴏᴛ Uᴘᴅᴀᴛᴇᴅ\nTᴏ Lᴀᴛᴇsᴛ Vᴇʀsɪᴏɴ 🔥 ...\n\n💕 Rᴇsᴛᴀʀᴛɪɴɢ: Gᴇɴɪᴜs Usᴇʀ\nBᴏᴛ, Pʟᴇᴀsᴇ » Wᴀɪᴛ ✨ ...**")
         system("git pull -f && pip3 install -U -r Installer")
         system("python3 -m AdityaHalder")
         return
