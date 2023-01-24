@@ -25,6 +25,6 @@ async def restart(client, m: Message):
 
 __MODULE__ = "Rᴇsᴛᴀʀᴛ"
 __HELP__ = f"""
-`.restart` **- Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Tᴏ Rᴇsᴛᴀʀᴛ Gᴇɴɪᴜs UsᴇʀBᴏᴛ**
+`.restart` **- Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Tᴏ Rᴇsᴛᴀʀᴛ WD Zone UsᴇʀBᴏᴛ**
 
 """
