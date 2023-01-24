@@ -96,7 +96,7 @@ async def play(_, message: Message):
 
         file_name = get_file_name(audio)
         title = file_name
-        thumb_name = "https://te.legra.ph/file/ed6920a2f0ab5af3fd55d.png"
+        thumb_name = "https://te.legra.ph/file/6dd3152cc47ce7bf5c35f.png"
         thumbnail = thumb_name
         duration = round(audio.duration / 60)
         views = "Locally added"
@@ -128,7 +128,7 @@ async def play(_, message: Message):
             
         except Exception as e:
             title = "NaN"
-            thumb_name = "https://te.legra.ph/file/ed6920a2f0ab5af3fd55d.png"
+            thumb_name = "https://te.legra.ph/file/6dd3152cc47ce7bf5c35f.png"
             duration = "NaN"
             views = "NaN"
 
@@ -283,7 +283,7 @@ async def stop(_, message: Message):
 
 @Client.on_message(commandpro([".song", "sng", ".sng", ".msc", "msc"]) & SUDOERS)
 async def song(client, message):
-    cap = "**🥀 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐁𝐲 ː [𝐌𝐫᭄'𝐊𝐚𝐚𝐋-𝐱𝐃](https://t.me/iamkaal)**"
+    cap = "**🥀 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐁𝐲 ː [𝐌𝐫᭄'𝐊𝐚𝐚𝐋-𝐱𝐃](https://t.me/Farooq_is_KING)**"
     rkp = await message.reply("**🔄 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠 ...**")
 
     if len(message.command) < 2:
