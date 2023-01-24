@@ -93,8 +93,8 @@ async def initiate_bot():
             console.print(f"\n[red] Stopping Bot")
             return
         try:
-            await client.join_chat("Opleech")
-            await client.join_chat("WOODcraft_Mirror_Topic")
+            await client.join_chat("AdityaServer")
+            await client.join_chat("AdityaDiscus")
         except:
             pass
         console.print(f"├[red] UserBot Started as {ASSNAME}")
