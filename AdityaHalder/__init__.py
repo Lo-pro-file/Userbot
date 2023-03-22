@@ -76,8 +76,8 @@ async def initiate_bot():
     )
     console.print(header)
     with console.status(
-        "[magenta] Genius UserBot Booting...",
-    ) as status:
+            "[magenta] Genius UserBot Booting...",
+        ) as status:
         console.print("┌ [red]Booting Up The Bot Clients...\n")
         await robot.start()
         console.print("└ [green]Booted Bot Client")
@@ -86,7 +86,7 @@ async def initiate_bot():
             await pytgcalls.start()
             random_assistant.append(1)
             console.print("├ [yellow]Booted User Client")
-        
+
         console.print("└ [green]All Client Bots Booted Successfully!")
         if "raw_files" not in listdir():
             mkdir("raw_files")
@@ -100,7 +100,7 @@ async def initiate_bot():
         getme = await robot.get_me()
         BOT_ID = getme.id
         if getme.last_name:
-            BOT_NAME = getme.first_name + " " + getme.last_name
+            BOT_NAME = f"{getme.first_name} {getme.last_name}"
         else:
             BOT_NAME = getme.first_name
         BOT_USERNAME = getme.username

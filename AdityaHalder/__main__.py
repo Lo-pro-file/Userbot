@@ -25,21 +25,19 @@ HELPABLE = {}
 
 async def initiate_bot():
     with console.status(
-        "[magenta] Finalizing Booting...",
-    ) as status:
+            "[magenta] Finalizing Booting...",
+        ) as status:
         status.update(
             status="[bold blue]Scanning for Plugins", spinner="earth"
         )
-        console.print("Found {} Plugins".format(len(ALL_MODULES)) + "\n")
+        console.print(f"Found {len(ALL_MODULES)} Plugins" + "\n")
         status.update(
             status="[bold red]Importing Plugins...",
             spinner="bouncingBall",
             spinner_style="yellow",
         )
         for all_module in ALL_MODULES:
-            imported_module = importlib.import_module(
-                "AdityaHalder.plugins." + all_module
-            )
+            imported_module = importlib.import_module(f"AdityaHalder.plugins.{all_module}")
             if (
                 hasattr(imported_module, "__MODULE__")
                 and imported_module.__MODULE__
@@ -99,7 +97,7 @@ async def initiate_bot():
             pass
         console.print(f"├[red] UserBot Started as {ASSNAME}")
         console.print(f"├[green] ID :- {ASSID}")
-        console.print(f"└[red] ✅ Genius UserBot Boot Complete 💯 ...")
+        console.print("└[red] ✅ Genius UserBot Boot Complete 💯 ...")
         await idle()
         console.print(f"\n[red] Userbot Stopped")
 
@@ -112,8 +110,8 @@ I Aᴍ Gᴇɴɪᴜs, Aɴ Aᴅᴠᴀɴᴄᴇᴅ UsᴇʀBᴏᴛ Wɪᴛʜ Sᴏᴍ�
 @robot.on_message(command(["start"]) & filters.private)
 async def start(_, message):
     await message.reply_photo(
-        photo=f"https://graph.org/file/24d43cd3d9de74fd7740b.jpg",
-        caption=f"""**━━━━━━━━━━━━━━━━━━━━━━━━
+        photo="https://graph.org/file/24d43cd3d9de74fd7740b.jpg",
+        caption="""**━━━━━━━━━━━━━━━━━━━━━━━━
 💥 Hᴇʟʟᴏ, I Aᴍ X Op Userbot » Aɴ Aᴅᴠᴀɴᴄᴇᴅ
 Pʀᴇᴍɪᴜᴍ Tᴇʟᴇɢʀᴀᴍ Usᴇʀ Bᴏᴛ.
 
@@ -126,14 +124,15 @@ Pʀᴇᴍɪᴜᴍ Tᴇʟᴇɢʀᴀᴍ Usᴇʀ Bᴏᴛ.
 💞 Cʟɪᴄᴋ Oɴ Dᴇᴘʟᴏʏ Bᴜᴛᴛᴏɴ Tᴏ Mᴀᴋᴇ
 Yᴏᴜʀ Oᴡɴ » Gᴇɴɪᴜs Usᴇʀ Bᴏᴛ.
 ━━━━━━━━━━━━━━━━━━━━━━━━**""",
-    reply_markup=InlineKeyboardMarkup(
+        reply_markup=InlineKeyboardMarkup(
             [
                 [
                     InlineKeyboardButton(
-                        "💥 Dᴇᴘʟᴏʏ Gᴇɴɪᴜs UsᴇʀBᴏᴛ ✨", url=f"https://t.me/Farooq_is_KING")
+                        "💥 Dᴇᴘʟᴏʏ Gᴇɴɪᴜs UsᴇʀBᴏᴛ ✨",
+                        url="https://t.me/Farooq_is_KING",
+                    )
                 ]
-                
-           ]
+            ]
         ),
     )
     
@@ -180,20 +179,15 @@ async def help_button(client, query):
     next_match = re.match(r"help_next\((.+?)\)", query.data)
     back_match = re.match(r"help_back", query.data)
     create_match = re.match(r"help_create", query.data)
-    top_text = f"""**🥀 Wᴇʟᴄᴏᴍᴇ Tᴏ Hᴇʟᴘ Mᴇɴᴜ Oғ :
+    top_text = """**🥀 Wᴇʟᴄᴏᴍᴇ Tᴏ Hᴇʟᴘ Mᴇɴᴜ Oғ :
 Gᴇɴɪᴜs UsᴇʀBᴏᴛ Vᴇʀ : `2.0` 🔥...
 
 💞 Jᴜsᴛ Cʟɪᴄᴋ Oɴ Bᴇʟᴏᴡ Iɴʟɪɴᴇ
 Tᴏ Gᴇᴛ Gᴇɴɪᴜs Cᴏᴍᴍᴀɴᴅs ✨...**
  """
     if mod_match:
-        module = mod_match.group(1)
-        text = (
-            "{} **{}**:\n".format(
-                "**🥀 Wᴇʟᴄᴏᴍᴇ Tᴏ Hᴇʟᴘ Mᴇɴᴜ Oғ :** ", HELPABLE[module].__MODULE__
-            )
-            + HELPABLE[module].__HELP__
-        )
+        module = mod_match[1]
+        text = f'{"**🥀 Wᴇʟᴄᴏᴍᴇ Tᴏ Hᴇʟᴘ Mᴇɴᴜ Oғ :** "} **{HELPABLE[module].__MODULE__}**:\n{HELPABLE[module].__HELP__}'
         key = InlineKeyboardMarkup(
             [
                 [
@@ -221,7 +215,7 @@ Tᴏ Gᴇᴛ Gᴇɴɪᴜs Cᴏᴍᴍᴀɴᴅs ✨...**
         )
         await query.message.delete()
     elif prev_match:
-        curr_page = int(prev_match.group(1))
+        curr_page = int(prev_match[1])
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(
@@ -231,7 +225,7 @@ Tᴏ Gᴇᴛ Gᴇɴɪᴜs Cᴏᴍᴍᴀɴᴅs ✨...**
         )
 
     elif next_match:
-        next_page = int(next_match.group(1))
+        next_page = int(next_match[1])
         await query.message.edit(
             text=top_text,
             reply_markup=InlineKeyboardMarkup(

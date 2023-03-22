@@ -14,10 +14,7 @@ async def gmute_user(chat):
 
 async def get_gmuted_users():
     results = await collection.find_one({"_id": "Gmute"})
-    if results:
-        return results["users"]
-    else:
-        return []
+    return results["users"] if results else []
 
 
 async def ungmute_user(chat):

@@ -17,15 +17,15 @@ LIMIT = 5
 
 
 async def set_pm(value: bool):
-    doc = {"_id": 1, "pmpermit": value}
-    doc2 = {"_id": "Approved", "users": []}
     r = await collection.find_one({"_id": 1})
     r2 = await collection.find_one({"_id": "Approved"})
     if r:
         await collection.update_one({"_id": 1}, {"$set": {"pmpermit": value}})
     else:
+        doc = {"_id": 1, "pmpermit": value}
         await collection.insert_one(doc)
     if not r2:
+        doc2 = {"_id": "Approved", "users": []}
         await collection.insert_one(doc2)
 
 
@@ -63,10 +63,7 @@ async def allow_user(chat):
 
 async def get_approved_users():
     results = await collection.find_one({"_id": "Approved"})
-    if results:
-        return results["users"]
-    else:
-        return []
+    return results["users"] if results else []
 
 
 async def deny_user(chat):
@@ -75,9 +72,4 @@ async def deny_user(chat):
 
 async def pm_guard():
     result = await collection.find_one({"_id": 1})
-    if not result:
-        return False
-    if not result["pmpermit"]:
-        return False
-    else:
-        return True
+    return bool(result["pmpermit"]) if result else False

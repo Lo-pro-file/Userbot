@@ -14,10 +14,7 @@ async def lraid_user(chat):
 
 async def get_lraid_users():
     results = await collection.find_one({"_id": "Lraid"})
-    if results:
-        return results["users"]
-    else:
-        return []
+    return results["users"] if results else []
 
 
 async def unlraid_user(chat):

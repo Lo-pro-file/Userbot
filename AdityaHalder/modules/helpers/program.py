@@ -10,9 +10,7 @@ def get_arg(message):
     msg = message.text
     msg = msg.replace(" ", "", 1) if msg[1] == " " else msg
     split = msg[1:].replace("\n", " \n").split(" ")
-    if " ".join(split[1:]).strip() == "":
-        return ""
-    return " ".join(split[1:])
+    return " ".join(split[1:]) if " ".join(split[1:]).strip() else ""
 
 
 def get_args(message):
@@ -35,10 +33,7 @@ def get_args(message):
 
 async def user_afk(filter, client: Client, message: Message):
     check = await get_afk_status()
-    if check:
-        return True
-    else:
-        return False
+    return bool(check)
 
 
 async def denied_users(filter, client: Client, message: Message):
@@ -85,13 +80,13 @@ def GetChatID(message: Message):
 def GetUserMentionable(user: User):
     """ Get mentionable text of a user."""
     if user.username:
-        username = "@{}".format(user.username)
+        username = f"@{user.username}"
     else:
         if user.last_name:
-            name_string = "{} {}".format(user.first_name, user.last_name)
+            name_string = f"{user.first_name} {user.last_name}"
         else:
-            name_string = "{}".format(user.first_name)
+            name_string = f"{user.first_name}"
 
-        username = "<a href='tg://user?id={}'>{}</a>".format(user.id, name_string)
+        username = f"<a href='tg://user?id={user.id}'>{name_string}</a>"
 
     return username

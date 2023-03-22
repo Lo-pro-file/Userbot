@@ -18,10 +18,7 @@ async def rban_list():
 
 async def kaalub_info(user):
     kk = await Rbun.find_one({"user": user})
-    if not kk:
-        return False
-    else:
-        return kk["reason"]
+    return kk["reason"] if kk else False
 
 
 # Aditya Halder // @AdityaHalder
@@ -43,7 +40,4 @@ async def lban_list():
 
 async def loveub_info(user):
     um = await Lbun.find_one({"user": user})
-    if not um:
-        return False
-    else:
-        return um["reason"]
+    return um["reason"] if um else False

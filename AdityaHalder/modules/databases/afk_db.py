@@ -30,11 +30,7 @@ async def set_unafk():
 
 async def get_afk_status():
     result = await collection.find_one({"_id": 1})
-    if not result:
-        return False
-    else:
-        status = result["afk_status"]
-        return status
+    return result["afk_status"] if result else False
 
 
 async def afk_stuff():

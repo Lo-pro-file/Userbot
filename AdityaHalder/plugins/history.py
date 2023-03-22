@@ -39,7 +39,7 @@ async def user_history(client: Client, message: Message):
 
 
 __MODULE__ = "Hɪsᴛᴏʀʏ"
-__HELP__ = f"""
+__HELP__ = """
 **🥀 Gᴇᴛ Nᴀᴍᴇ & Usᴇʀɴᴀᴍᴇ Hɪsᴛᴏʀʏ Oғ Aɴʏ Usᴇʀ ✨**
 
 **ᴜsᴀɢᴇ:**

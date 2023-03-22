@@ -18,7 +18,7 @@ async def mother_chod(client: Client, message: Message):
     
     
 __MODULE__ = "Aʙᴜsᴇ"
-__HELP__ = f"""
+__HELP__ = """
 **🥀 Hᴇʏ Hᴇʀᴇ Is Aʟʟ Aʙᴜsᴇ ✨**
 
 **Cᴏᴍᴍᴀɴᴅs:**

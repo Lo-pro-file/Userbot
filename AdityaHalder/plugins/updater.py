@@ -51,8 +51,7 @@ def updater():
 async def update_bot(_, message: Message):
     chat_id = message.chat.id
     msg = await message.edit("**🥀 ᴄʜᴇᴄᴋɪɴɢ ᴜᴘᴅᴀᴛᴇs ✨ ...**")
-    update_avail = updater()
-    if update_avail:
+    if update_avail := updater():
         await msg.edit("**🥀 WD ZONE UsᴇʀBᴏᴛ Uᴘᴅᴀᴛᴇᴅ\nTᴏ Lᴀᴛᴇsᴛ Vᴇʀsɪᴏɴ 🔥 ...\n\n💕 Rᴇsᴛᴀʀᴛɪɴɢ: Gᴇɴɪᴜs Usᴇʀ\nBᴏᴛ, Pʟᴇᴀsᴇ » Wᴀɪᴛ ✨ ...**")
         system("git pull -f && pip3 install -U -r Installer")
         system("python3 -m AdityaHalder")
@@ -60,7 +59,7 @@ async def update_bot(_, message: Message):
     await msg.edit(f"**🥀 WD ZONE UsᴇʀBᴏᴛ Aʟʀᴇᴀᴅʏ\nUᴘᴅᴀᴛᴇᴅ Tᴏ Lᴀᴛᴇsᴛ 🔥 ...\n\n💕 Fᴏʀ Aɴʏ Qᴜᴇʀʏ › Cᴏɴᴛᴀᴄᴛ\nTᴏ » @AdityaHalder ✨ ...**")
 
 __MODULE__ = "Uᴘᴅᴀᴛᴇ"
-__HELP__ = f"""
+__HELP__ = """
 
 **Nᴏᴛᴇ:**
 **🥀 Tʜɪs Pʟᴜɢɪɴ Fᴏʀ Uᴘᴅᴀᴛᴇ Yᴏᴜʀ Usᴇʀ Bᴏᴛ**

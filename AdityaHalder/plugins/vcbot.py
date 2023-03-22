@@ -104,9 +104,9 @@ async def play(_, message: Message):
 
         requested_by = message.from_user.first_name
         file_path = await converter.convert(
-            (await message.reply_to_message.download(file_name))
-            if not path.isfile(path.join("downloads", file_name))
-            else file_name
+            file_name
+            if path.isfile(path.join("downloads", file_name))
+            else await message.reply_to_message.download(file_name)
         )
 
     elif url:
@@ -125,7 +125,7 @@ async def play(_, message: Message):
                 dur += int(dur_arr[i]) * secmul
                 secmul *= 60
 
-            
+
         except Exception as e:
             title = "NaN"
             thumb_name = "https://te.legra.ph/file/6dd3152cc47ce7bf5c35f.png"
@@ -164,20 +164,19 @@ async def play(_, message: Message):
             await lel.edit(
                 "**🔊 𝐌𝐮𝐬𝐢𝐜 😕 𝐍𝐨𝐭 📵 𝐅𝐨𝐮𝐧𝐝❗️\n💞 𝐓𝐫𝐲 ♨️ 𝐀𝐧𝐨𝐭𝐡𝐞𝐫 🌷...**"
             ) and await lel.delete()
-            print(str(e))
+            print(e)
             return
 
 
         requested_by = message.from_user.first_name
         file_path = await converter.convert(youtube.download(url))
-    ACTV_CALLS = []
     chat_id = message.chat.id
-    for x in clientbot.pytgcalls.active_calls:
-        ACTV_CALLS.append(int(x.chat_id))
+    ACTV_CALLS = [int(x.chat_id) for x in clientbot.pytgcalls.active_calls]
     if int(chat_id) in ACTV_CALLS:
         position = await queues.put(chat_id, file=file_path)
-        await lel.edit("**💥 𝐊𝐚𝐚𝐥🤞𝐀𝐝𝐝𝐞𝐝 💿 𝐒𝐨𝐧𝐠❗️\n🔊 𝐀𝐭 💞 𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧 » `{}` 🌷 ...**".format(position),
-    )
+        await lel.edit(
+            f"**💥 𝐊𝐚𝐚𝐥🤞𝐀𝐝𝐝𝐞𝐝 💿 𝐒𝐨𝐧𝐠❗️\n🔊 𝐀𝐭 💞 𝐏𝐨𝐬𝐢𝐭𝐢𝐨𝐧 » `{position}` 🌷 ...**"
+        )
     else:
         await clientbot.pytgcalls.join_group_call(
                 chat_id, 
@@ -199,10 +198,8 @@ async def play(_, message: Message):
 @Client.on_message(commandpro([".pse", "pse"]) & SUDOERS)
 async def pause(_, message: Message):
     await message.delete()
-    ACTV_CALLS = []
     chat_id = message.chat.id
-    for x in clientbot.pytgcalls.active_calls:
-        ACTV_CALLS.append(int(x.chat_id))
+    ACTV_CALLS = [int(x.chat_id) for x in clientbot.pytgcalls.active_calls]
     if int(chat_id) not in ACTV_CALLS:
         noac = await message.reply_text("**💥 𝐍𝐨𝐭𝐡𝐢𝐧𝐠 🔇 𝐏𝐥𝐚𝐲𝐢𝐧𝐠 🌷 ...**")
         await noac.delete()
@@ -214,10 +211,8 @@ async def pause(_, message: Message):
 @Client.on_message(commandpro([".rsm", "rsm"]) & SUDOERS)
 async def resume(_, message: Message):
     await message.delete()
-    ACTV_CALLS = []
     chat_id = message.chat.id
-    for x in clientbot.pytgcalls.active_calls:
-        ACTV_CALLS.append(int(x.chat_id))
+    ACTV_CALLS = [int(x.chat_id) for x in clientbot.pytgcalls.active_calls]
     if int(chat_id) not in ACTV_CALLS:
         noac = await message.reply_text("**💥 𝐍𝐨𝐭𝐡𝐢𝐧𝐠 🔇 𝐏𝐥𝐚𝐲𝐢𝐧𝐠 🌷 ...**")
         await noac.delete()
@@ -231,16 +226,14 @@ async def resume(_, message: Message):
 async def skip(_, message: Message):
     global que
     await message.delete()
-    ACTV_CALLS = []
     chat_id = message.chat.id
-    for x in clientbot.pytgcalls.active_calls:
-        ACTV_CALLS.append(int(x.chat_id))
+    ACTV_CALLS = [int(x.chat_id) for x in clientbot.pytgcalls.active_calls]
     if int(chat_id) not in ACTV_CALLS:
        novc = await message.reply_text("**💥 𝐍𝐨𝐭𝐡𝐢𝐧𝐠 🔇 𝐏𝐥𝐚𝐲𝐢𝐧𝐠 🌷 ...**")
        await novc.delete()
     else:
         queues.task_done(chat_id)
-        
+
         if queues.is_empty(chat_id):
             empt = await message.reply_text("**🥀 𝐄𝐦𝐩𝐭𝐲 𝐐𝐮𝐞𝐮𝐞, 𝐋𝐞𝐚𝐯𝐢𝐧𝐠 𝐕𝐂 ✨ ...**")
             await empt.delete()
@@ -262,10 +255,8 @@ async def skip(_, message: Message):
 @Client.on_message(commandpro(["stop", "/stop", "/end", ".stp", ".end", "end", "stp"]) & SUDOERS)
 async def stop(_, message: Message):
     await message.delete()
-    ACTV_CALLS = []
     chat_id = message.chat.id
-    for x in clientbot.pytgcalls.active_calls:
-        ACTV_CALLS.append(int(x.chat_id))
+    ACTV_CALLS = [int(x.chat_id) for x in clientbot.pytgcalls.active_calls]
     if int(chat_id) not in ACTV_CALLS:
         noac = await message.reply_text("**💥 𝐍𝐨𝐭𝐡𝐢𝐧𝐠 🔇 𝐏𝐥𝐚𝐲𝐢𝐧𝐠 🌷 ...**")
         await noac.delete()
@@ -283,7 +274,6 @@ async def stop(_, message: Message):
 
 @Client.on_message(commandpro([".song", "sng", ".sng", ".msc", "msc"]) & SUDOERS)
 async def song(client, message):
-    cap = "**🥀 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐁𝐲 ː [𝐌𝐫᭄'𝐊𝐚𝐚𝐋-𝐱𝐃](https://t.me/Farooq_is_KING)**"
     rkp = await message.reply("**🔄 𝐏𝐫𝐨𝐜𝐞𝐬𝐬𝐢𝐧𝐠 ...**")
 
     if len(message.command) < 2:
@@ -358,13 +348,14 @@ async def song(client, message):
     if song:
         await rkp.edit("**📤 𝐔𝐩𝐥𝐨𝐚𝐝𝐢𝐧𝐠 ...**")
         lol = "./AdityaHalder/resource/logo.jpg"
+        cap = "**🥀 𝐔𝐩𝐥𝐨𝐚𝐝𝐞𝐝 𝐁𝐲 ː [𝐌𝐫᭄'𝐊𝐚𝐚𝐋-𝐱𝐃](https://t.me/Farooq_is_KING)**"
         lel = await message.reply_audio(
                  f"{rip_data['id']}.mp3",
                  duration=int(rip_data["duration"]),
                  title=str(rip_data["title"]),
                  performer=str(rip_data["uploader"]),
                  thumb=lol,
-                 caption=cap) 
+                 caption=cap)
         await rkp.delete()
 
 
@@ -372,17 +363,15 @@ async def song(client, message):
 async def update_admin(client, message):
     global a
     await message.delete()
-    new_admins = []
     new_ads = await client.get_chat_members(message.chat.id, filter="administrators")
-    for u in new_ads:
-        new_admins.append(u.user.id)
+    new_admins = [u.user.id for u in new_ads]
     a[message.chat.id] = new_admins
     cach = await message.reply_text("**🔥 𝐑𝐞𝐥𝐨𝐚𝐝𝐞𝐝 🌷 ...**")
     await cach.delete()
 
 
 __MODULE__ = "Vᴄ Bᴏᴛ"
-__HELP__ = f"""
+__HELP__ = """
 **Yᴏᴜ Cᴀɴ Pʟᴀʏ Mᴜsɪᴄ Oɴ VC**
 
 `.ply` - Pʟᴀʏ Mᴜsɪᴄ Oɴ Vᴄ

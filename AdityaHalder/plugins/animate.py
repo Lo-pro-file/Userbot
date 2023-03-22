@@ -130,7 +130,7 @@ async def hello_world(client: Client, message: Message):
     
 
 __MODULE__ = "Aɴɪᴍᴀᴛᴇ"
-__HELP__ = f"""
+__HELP__ = """
 **🇮🇳 Sᴏᴍᴇ Bᴇsᴛ Aɴɪᴍᴀᴛɪᴏɴs :**
 
 `.emoji` - **Cʜᴀɴɢɪɴɢ Eᴍᴏᴊɪ Fᴜɴ**

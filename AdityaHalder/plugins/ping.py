@@ -14,7 +14,7 @@ async def ping(Client, message):
 
 
 __MODULE__ = "Pɪɴɢ"
-__HELP__ = f"""
+__HELP__ = """
 **🥀 Cʜᴇᴄᴋ Yᴏᴜʀ Gᴇɴɪᴜs UsᴇʀBᴏᴛ Pɪɴɢ.**
 
 `.ping` - **Usᴇ Tʜɪs Cᴏᴍᴍᴀɴᴅ Tᴏ Cʜᴇᴄᴋ**

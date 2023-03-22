@@ -77,7 +77,7 @@ async def userdel(client, message: Message):
             SUDOERS.remove(user.id)
             await message.reply_text("Removed from Bot's Sudo User")
             return
-        await message.reply_text(f"Something wrong happened.")
+        await message.reply_text("Something wrong happened.")
         return
     user_id = message.reply_to_message.from_user.id
     if user_id not in SUDOERS:
@@ -87,7 +87,7 @@ async def userdel(client, message: Message):
         SUDOERS.remove(user_id)
         await message.reply_text("Removed from Bot's Sudo User")
         return
-    await message.reply_text(f"Something wrong happened.")
+    await message.reply_text("Something wrong happened.")
 
 
 @app.on_message(commandpro([".sudousers", ".sudolist"]) & SUDOERS)
@@ -97,9 +97,7 @@ async def sudoers_list(client, message: Message):
     for x in OWNER_ID:
         try:
             user = await app.get_users(x)
-            user = (
-                user.first_name if not user.mention else user.mention
-            )
+            user = user.mention or user.first_name
             count += 1
         except Exception:
             continue
@@ -109,11 +107,7 @@ async def sudoers_list(client, message: Message):
         if user_id not in OWNER_ID:
             try:
                 user = await app.get_users(user_id)
-                user = (
-                    user.first_name
-                    if not user.mention
-                    else user.mention
-                )
+                user = user.mention or user.first_name
                 if smex == 0:
                     smex += 1
                     text += "\n⭐️<u> **Sudo Users:**</u>\n"
@@ -129,7 +123,7 @@ async def sudoers_list(client, message: Message):
 
 
 __MODULE__ = "Sᴜᴅᴏ"
-__HELP__ = f"""
+__HELP__ = """
 **🇮🇳 Sᴜᴅᴏ Usᴇʀs Cᴏɴᴛʀᴏʟᴇʀ :**
 
 `.addsudo` - **Aᴅᴅ Aɴ Usᴇʀ Tᴏ Sᴜᴅᴏ Usᴇʀ**

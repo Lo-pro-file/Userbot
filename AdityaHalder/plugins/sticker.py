@@ -127,11 +127,10 @@ async def kang_stick(app: Client, message: Message):
     emoji = "🤔"
     try:
         a_emoji = a_emoji.strip()
-        if not a_emoji.isalpha():
-            if not a_emoji.isnumeric():
-                emoji = a_emoji
-        else:
+        if a_emoji.isalpha():
             emoji = "🤔"
+        elif not a_emoji.isnumeric():
+            emoji = a_emoji
     except:
         emoji = "🤔"
     exist = None
@@ -185,7 +184,7 @@ async def kang_stick(app: Client, message: Message):
         messi = (await app.get_history("Stickers", 1))[0]
         while limit in messi.text:
             pack += 1
-            prev_pack = int(pack) - 1
+            prev_pack = pack - 1
             await kang_msg.edit(f"He he, Pack Number `{prev_pack}` is Full Of Stickers! Now Switching to `{pack}` Pack!")
             packname = f"@{nm} Stickers {pack}"
             packshortname = f"GENIUS_{message.from_user.id}_{pack}"
@@ -213,13 +212,17 @@ async def kang_stick(app: Client, message: Message):
                 await app.send_message("Stickers", "/skip")
                 await asyncio.sleep(0.5)
                 await app.send_message("Stickers", packshortname)
-                return await kang_msg.edit("**Sticker Kanged!** \n\n**Emoji:** {} \n**Pack:** [Here](https://t.me/addstickers/{})".format(emoji, packshortname))
+                return await kang_msg.edit(
+                    f"**Sticker Kanged!** \n\n**Emoji:** {emoji} \n**Pack:** [Here](https://t.me/addstickers/{packshortname})"
+                )
         await app.send_document("Stickers", file_name)
         await asyncio.sleep(1)
         await app.send_message("Stickers", emoji)
         await asyncio.sleep(0.5)
         await app.send_message("Stickers", "/done")
-        await kang_msg.edit("**Sticker Kanged!** \n\n**Emoji:** {} \n**Pack:** [Here](https://t.me/addstickers/{})".format(emoji, packshortname))
+        await kang_msg.edit(
+            f"**Sticker Kanged!** \n\n**Emoji:** {emoji} \n**Pack:** [Here](https://t.me/addstickers/{packshortname})"
+        )
     else:
         if is_anim:
             await app.send_message("Stickers", "/newanimated")
@@ -238,7 +241,9 @@ async def kang_stick(app: Client, message: Message):
         await app.send_message("Stickers", "/skip")
         await asyncio.sleep(0.5)
         await app.send_message("Stickers", packshortname)
-        await kang_msg.edit("**Sticker Kanged!** \n\n**Emoji:** {} \n**Pack:** [Here](https://t.me/addstickers/{})".format(emoji, packshortname))
+        await kang_msg.edit(
+            f"**Sticker Kanged!** \n\n**Emoji:** {emoji} \n**Pack:** [Here](https://t.me/addstickers/{packshortname})"
+        )
         try:
             if os.path.exists("Kanged_Sticker_GENIUS.png"):
                 os.remove("Kanged_Sticker_GENIUS.png")
@@ -252,7 +257,6 @@ async def kang_stick(app: Client, message: Message):
 
 def resize_image(image):
     im = Image.open(image)
-    maxsize = (512, 512)
     if (im.width and im.height) < 512:
         size1 = im.width
         size2 = im.height
@@ -269,6 +273,7 @@ def resize_image(image):
         sizenew = (size1new, size2new)
         im = im.resize(sizenew)
     else:
+        maxsize = (512, 512)
         im.thumbnail(maxsize)
     file_name = "Kanged_Sticker_NEXAUB.png"
     im.save(file_name, "PNG")
@@ -280,7 +285,7 @@ def resize_image(image):
 
 
 __MODULE__ = "Sᴛɪᴄᴋᴇʀ"
-__HELP__ = f"""
+__HELP__ = """
 **🥀 Kᴀɴɢ Aɴʏ Sᴛɪᴄᴋᴇʀ Aɴᴅ Mᴀᴋᴇ Yᴏᴜʀ Oᴡɴ Sᴛɪᴄᴋᴇʀ Pᴀᴄᴋ ✨**
 
 **ᴜsᴀɢᴇ:**

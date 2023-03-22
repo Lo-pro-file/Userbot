@@ -24,9 +24,7 @@ async def watch_raids(client: Client, message: Message):
     user = message.from_user.id
     kaal = random.choice(REPLY_RAID)
     love = random.choice(LOVER_RAID)
-    if int(user) in VERIFIED_USERS:
-        return
-    elif int(user) in SUDO_USERS:
+    if int(user) in VERIFIED_USERS or int(user) in SUDO_USERS:
         return
     if int(message.chat.id) in GROUP:
         return
@@ -45,7 +43,7 @@ async def watch_raids(client: Client, message: Message):
 
 
 __MODULE__ = "Rᴀɪᴅ"
-__HELP__ = f"""
+__HELP__ = """
 **🥀 Lᴏᴠᴇ Rᴀɪᴅ & Rᴇᴘʟʏ Rᴀɪᴅ ✨**
 
 **ᴜsᴀɢᴇ:**

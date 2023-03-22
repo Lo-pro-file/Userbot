@@ -8,20 +8,16 @@ from AdityaHalder.modules.helpers.interval import IntervalHelper
 import AdityaHalder.modules.cache.admins
 
 async def get_administrators(chat: Chat) -> List[User]:
-    get = AdityaHalder.modules.cache.admins.get(chat.id)
-
-    if get:
+    if get := AdityaHalder.modules.cache.admins.get(chat.id):
         return get
-    else:
-        administrators = await chat.get_members(filter="administrators")
-        to_set = []
-
-        for administrator in administrators:
-            if administrator.can_manage_voice_chats:
-                to_set.append(administrator.user.id)
-
-        AdityaHalder.modules.cache.admins.set(chat.id, to_set)
-        return await get_administrators(chat)
+    administrators = await chat.get_members(filter="administrators")
+    to_set = [
+        administrator.user.id
+        for administrator in administrators
+        if administrator.can_manage_voice_chats
+    ]
+    AdityaHalder.modules.cache.admins.set(chat.id, to_set)
+    return await get_administrators(chat)
 
 
 
@@ -37,18 +33,12 @@ async def CheckAdmin(client: Client, message: Message):
 
     if SELF.status not in ranks:
         await message.edit("__I'm not Admin!__")
-        await asyncio.sleep(2)
-        await message.delete()
-
+    elif SELF.status is not admin or SELF.can_restrict_members:
+        return True
     else:
-        if SELF.status is not admin:
-            return True
-        elif SELF.can_restrict_members:
-            return True
-        else:
-            await message.edit("__No Permissions to restrict Members__")
-            await asyncio.sleep(2)
-            await message.delete()
+        await message.edit("__No Permissions to restrict Members__")
+    await asyncio.sleep(2)
+    await message.delete()
 
 
 async def CheckReplyAdmin(message: Message):
@@ -68,11 +58,10 @@ async def CheckReplyAdmin(message: Message):
 
 
 async def Timer(message: Message):
-    if len(message.command) > 1:
-        secs = IntervalHelper(message.command[1])
-        return int(str(time()).split(".")[0] + secs.to_secs()[0])
-    else:
+    if len(message.command) <= 1:
         return 0
+    secs = IntervalHelper(message.command[1])
+    return int(str(time()).split(".")[0] + secs.to_secs()[0])
 
 
 async def TimerString(message: Message):
